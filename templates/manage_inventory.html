@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manejo de inventario</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- this part links the css page for app aesthetics -->
+</head>
+<body>
+    <img src="{{ url_for('static', filename='OIL&GAS.png') }}" alt="Company Logo" class="logo">
+    <!--this puts the logo of the company on the top left of the screen-->
+    <h2>Manejo de inventario</h2>  
+    <!-- this is the title of the manage inventory system-->
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+    <!-- just in case there is any errors that need to be adressed IN this page-->
+    <h3>Añadir una nueva parte</h3>
+    <form method="post">
+        <input type="hidden" name="action" value="add">
+        <label>PARTE_NUMERO:</label>
+        <input type="text" name="part_number" required>
+        <br>
+        <label>DESCRIPCION:</label>
+        <input type="text" name="description" required>
+        <br>
+        <label>CANTIDAD_REQUERIDA:</label>
+        <input type="number" name="required_quantity" required>
+        <br>
+        <label>CANTIDAD_STOCK:</label>
+        <input type="number" name="stock_quantity" required>
+        <br>
+        <label>PROVEEDOR_SELECIONADO:</label>
+        <input type="text" name="supplier" required>
+        <br>
+        <label>VALOR_UNITARIO:</label>
+        <input type="number" name="unit_value" required>
+        <br>
+        <button type="submit">Añadir</button>
+    </form>
+    <!--this is the form responsible for adding data into the inventory, this form ask for input for all of the categories and adds a button to complete the action-->
+    
+    <h3>Editar</h3>
+    <form method="post">
+        <input type="hidden" name="action" value="edit">
+        <label>PARTE_NUMERO (para Editar):</label>
+        <input type="text" name="part_number" required>
+        <br>
+        <label>DESCRIPCION:</label>
+        <input type="text" name="description" required>
+        <br>
+        <label>CANTIDAD_REQUERIDA:</label>
+        <input type="number" name="required_quantity" required>
+        <br>
+        <label>CANTIDAD_STOCK:</label>
+        <input type="number" name="stock_quantity" required>
+        <br>
+        <label>PROVEEDOR_SELECIONADO:</label>
+        <input type="text" name="supplier" required>
+        <br>
+        <label>VALOR_UNITARIO:</label>
+        <input type="number" name="unit_value" required>
+        <br>
+        <button type="submit">Editar</button>
+    </form>
+    <!--the same as the previous one, ask for input but this button is for completing an editing modification-->
+
+    <h3>Eliminar</h3>
+    <form method="post">
+        <input type="hidden" name="action" value="delete">
+        <label>Numero de parte (para borrar):</label>
+        <input type="text" name="part_number" required>
+        <br>
+        <button type="submit" style="background-color: red; color: white;">Eliminar</button>
+    </form>
+    <!--this one is shorter than the other 2 because it only needs
+    the serial number of a part to remove everything from a row in the inventory but it follows the same logic
+    of asking for input, the button on this one is to comlete an deletion action
+    -->
+    
+    <h3>Inventario actual</h3>
+    <table border="1">
+        <tr>
+            <th>PARTE_NUMERO</th>
+            <th>DESCRIPCION</th>
+            <th>CANTIDAD_REQUERIDA</th>
+            <th>Stock</th>
+            <th>PROVEEDOR</th>
+            <th>VALOR_UNITARIO</th>
+        </tr>
+        {% for part in inventory %}
+        <tr>
+            <td>{{ part.PARTE_NUMERO }}</td>
+            <td>{{ part.DESCRIPCION }}</td>
+            <td>{{ part.CANTIDAD_REQUERIDA }}</td>
+            <td>{{ part.CANTIDAD_STOCK }}</td>
+            <td>{{ part.PROVEEDOR_SELECIONADO }}</td>
+            <td>{{ part.VALOR_UNITARIO }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <!-- this prints the current inventory, 
+    it updates everytime a change is made in the inventory because of the manage inventory function in app.py -->
+    <br>
+    <a href="{{ url_for('search') }}">Volver a buscar una parte</a>
+    <!--this is a link that takes the user back to the search system when they are done modifying the inventory-->
+
+
+</body>
+</html>

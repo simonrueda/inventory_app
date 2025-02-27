@@ -1,0 +1,117 @@
+/* General Page Styling */
+body {
+    font-family: 'Times New Roman', Times, serif; /*different letter for aestethics*/
+    background: linear-gradient(to top, #ccc, #ffffff); /* gradient of color for a more professional look for the app */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    height: auto; /* Full-screen height */
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: auto;
+    /* both "overflow" definitions are for allowing the user to scroll through the web app */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    position: absolute; /* Positions the logo relative to the page */
+    top: 10px;  /* Distance of the logo from the top */
+    left: 10px; /* Distance of the logo from the left */
+    width: 200px; /* Adjust the size of the logo */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Page Header */
+h2 {
+    padding: 10px;
+    border-radius: 5px;
+    color:#000;
+/*this is for the header of the page, uses a padding for better visibility*/
+}
+
+/* Form Styling */
+form {
+    background: white;
+    max-width: 400px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    /* this is for the looks of the space that the input system is in,
+    a box-shadow is used for a more professional look (make this space look as if it was floating in the web app */
+}
+
+label {
+    font-weight: bold;
+}
+/* this one is for making all the text has bold, for more visibility and emphasis */
+input[type="text"], input[type="password"], input[type="number"] {
+    width: 100%;
+    padding: 7px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+/* this style is for the input sytem, the little box in wich the user enters an input,
+ style is the same for every type of input for a better look */
+/* Buttons */
+button {
+    background-color:  #0a8b6f; /* colors of the company */
+    color: #000;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* this is just the style of the buttons */
+button:hover {
+    background-color: #1c4982;
+    transition: background 0.3s ease-in-out;
+}
+/* this is for when a user hovers the pointer on top of a button, this style changes its color to another of the colors of the company,
+is used to give some emphasis on wich button the user is about to click */
+/* Error, Success, and Warning Messages */
+p {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+p.error {
+    background: #ffffff; /* Red */
+    color: #dc3545;
+}
+
+p.success {
+    background-color: #28a745; /* Green */
+    color: white;
+}
+
+p.warning {
+    background-color: #ffc107; /* Yellow */
+    color: black;
+}
+/* all of these are the styles for the different messages the web app shows */
+/* Links */
+a {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    background-color: #ccc;
+    color: #012dd6;
+    font-weight: bold;
+}
+/* style of the links that redirect the user to diferent pages of the web app */
+a:hover {
+    text-decoration: underline;
+} 
+/* same logic as the hover buttons, when a user hovers the pointer on top of a link,
+it gets underline for emphasis on wich link the user is about to clik on */
