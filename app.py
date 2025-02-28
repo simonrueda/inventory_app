@@ -185,4 +185,4 @@ def search():
 # this function (search) is responsible for the search menu, so that users can navigate trough the inventory without modifying it. it has 3 outputs for the 3 diferent situations. 1. part on tock 2. part out of stock and 3. part non existing
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(host='0.0.0.0.', port=10000) 
