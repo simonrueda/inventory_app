@@ -3,7 +3,7 @@ import csv
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 # here im importing all of the needed modules for future needs of the aplication
-app = Flask(__name__, templates_folder="templates")
+app = Flask(__name__)
 app.secret_key = 'C0MPUT3RSC13NC3' 
 # initializing flask and encrypting data for security measures
 login_manager = LoginManager()  
