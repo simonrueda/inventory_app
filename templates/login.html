@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <img src="{{ url_for('static', filename='OIL&GAS.png') }}" alt="Company Logo" class="logo">
+
+    <h2>Iniciar Sesión</h2>
+
+    {% if error %}
+        <p style="color: red;"> {{ error }}</p>
+    {% endif %}
+
+   <!--in case of an error, this is where it can be adressed in the app.py code-->
+
+    <form method="post">
+        <label>Usuario:</label>
+        <input type="text" name="username" required>
+        <br>
+        <!--ask input of the username-->
+        <label>Contraseña:</label>
+        <input type="password" name="password" required>
+        <br>
+        <!--ask input of the password of said username-->  
+        <button type="submit">Iniciar Sesión</button>
+        <!--button to complete the log in action-->
+    </form>
+    <br>
+    <a href="{{ url_for('home') }}">Volver al inicio</a>
+    <!-- link that redirects user to home page-->
+</body>
+</html>
