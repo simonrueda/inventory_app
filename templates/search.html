@@ -10,6 +10,7 @@
 
     <h2>Buscar una parte</h2>
     
+    <!--different messages that may be adressed on the search system, thats what this part is used for -->
     {% if error %}
         <p styles="error"> {{ error }}</p>
     {% endif %}
@@ -22,19 +23,18 @@
         <p styles="warning"> {{ no_stock }}</p>
     {% endif %}
 
-    <!--different messages that may be adressed on the search system, thats what this part is used for -->
 
     <form method="POST">
+        <!--ask for input of the serial number of the part that the user is looking for -->
         <label>Numero de serie:</label>
         <input type="text" name="serial_number" required>
         <br>
-        <!--ask for input of the serial number of the part that the user is looking for -->
         <button type="submit">Buscar</button>
     </form>
     <br>
-    <a href="{{ url_for('logout') }}">Cerrar Sesión</a> 
     <!-- link that closes the user session (log out) and redirects them to the log in page -->
-    <a href="{{ url_for('manage_inventory') }}" class="admin-button"> Manejar inventario</a>
+    <a href="{{ url_for('logout') }}">Cerrar Sesión</a> 
     <!-- link that redirects the admin user (user 3) into the manage inventory system -->
+    <a href="{{ url_for('manage_inventory') }}" class="admin-button"> Manejar inventario</a>
 </body>
 </html>
