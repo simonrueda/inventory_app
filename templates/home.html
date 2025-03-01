@@ -2,17 +2,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!--this is the same for all the html files, this links the CSS with the html for the web app aesthetics-->
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-    <!--this is the same for all the html files, this links the CSS with the html for the web app aesthetics-->
 </head>
 <body>
 
-    <img src="{{ url_for('static', filename='OIL&GAS.png') }}" alt="Company Logo" class="logo">
     <!--this is for showing the logo of the company-->
+    <img src="{{ url_for('static', filename='OIL&GAS.png') }}" alt="Company Logo" class="logo">
+    <!--a link that redirects the user to the log in system--> 
     <h2>Bienvenido/a al sistema de inventario</h2>
     <a href="{{ url_for('login') }}">Iniciar Sesión</a> 
-    <!--a link that redirects the user to the log in system--> 
 </body>
 </body>
 </html> 
