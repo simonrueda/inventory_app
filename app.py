@@ -1,42 +1,43 @@
+# here im importing all of the needed modules for future needs of the aplication
 from flask import Flask, render_template, request
 import csv
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-# here im importing all of the needed modules for future needs of the aplication
+# initializing flask and encrypting data for security measures
 app = Flask(__name__)
 app.secret_key = 'C0MPUT3RSC13NC3' 
-# initializing flask and encrypting data for security measures
+# creating a login system so only authorized users can access the web app
 login_manager = LoginManager()  
 login_manager.init_app(app)
 login_manager.login_view = 'login'  
-# creating a login system so only authorized users can access the web app
 
+# this class handles user authentication 
 class User(UserMixin):
     def __init__(self, id, username, password):
         self.id = id  # Unique ID for the user
         self.username = username  # Username of the user
         self.password = password  # Password
-# this class handles user authentication 
+# defining all of the predetermined users because the client only needs 3, there´s no need of creating a sign up system.
 users = {
     "user1": User(1, "departamentoing", "1NG3N13R14"),
     "user2": User(2, "departamentoinv", "1NV3NT4R10"),
     "user3": User(3, "departamentocompras", "C0MPR45")
 }
-# defining all of the predetermined users because the client only needs 3, there´s no need of creating a sign up system.
 
+# this function searchs a user for its ID to check a initiated session, important to check if the user is an admin user or not
 @login_manager.user_loader
 def load_user(user_id):
     for user in users.values():
         if user.id == int(user_id):
             return user
     return None
-# this function searchs a user for its ID to check a initiated session, important to check if the user is an admin user or not
 
+# just to show the home page of the web app
 @app.route('/')
 def home():
     return render_template('home.html')
-# just to show the home page of the web app
 
+# this is responsible of making the log in work correctly, without it, it wouldn´t be possible to log in
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -52,27 +53,26 @@ def login():
         return render_template('login.html', error="Invalid username or password. Please try again.")
 
     return render_template('login.html')
-# this is responsible of making the log in work correctly, without it, it wouldn´t be possible to log in
+# this is responsible of giving the user the possibility of loging out and potentially use another username
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
-# this is responsible of giving the user the possibility of loging out and potentially use another username
 
+# this function reads the CSV data
 def read_inventory():
     with open('data.csv', 'r', encoding='utf-8-sig') as file:
         reader = csv.DictReader(file)
         return list(reader)  # Convert CSV rows into a list of dictionaries
-# this function reads the CSV data
 
+# this function uploads writen data into the CSV, kind of editing the "inventory"
 def write_inventory(data):
     with open('data.csv', 'w', encoding='utf-8-sig', newline='') as file:
         fieldnames = ['PARTE_NUMERO', 'DESCRIPCION', 'CANTIDAD_REQUERIDA', 'CANTIDAD_STOCK', 'PROVEEDOR_SELECIONADO', 'VALOR_UNITARIO']
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()  # Write column headers
         writer.writerows(data)  # Write the updated inventory
-# this function uploads writen data into the CSV, kind of editing the "inventory"
 # Manage Inventory Page (Add, Edit, Delete)
 @app.route('/manage_inventory', methods=['GET', 'POST'])
 @login_required
@@ -139,6 +139,7 @@ def manage_inventory():
 
     return render_template('manage_inventory.html', inventory=inventory)
 
+# this function (search) is responsible for the search menu, so that users can navigate trough the inventory without modifying it. it has 3 outputs for the 3 diferent situations. 1. part on tock 2. part out of stock and 3. part non existing
 @app.route('/search', methods=['GET', 'POST'])
 @login_required 
 def search():
@@ -182,7 +183,6 @@ def search():
      # if the part is not found, the app returns to the search page with an error message
 
     return render_template('search.html')
-# this function (search) is responsible for the search menu, so that users can navigate trough the inventory without modifying it. it has 3 outputs for the 3 diferent situations. 1. part on tock 2. part out of stock and 3. part non existing
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0.', port=10000) 
