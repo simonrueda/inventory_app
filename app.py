@@ -50,7 +50,7 @@ def login():
                 return redirect(url_for('search'))  # if login is correct, it redirect to search
 
         # If login is incorrect, it returns to login page with an error message
-        return render_template('login.html', error="Invalid username or password. Please try again.")
+        return render_template('login.html', error="ususario o/y contraseña incorrectos, intentelo de nuevo")
 
     return render_template('login.html')
 # this is responsible of giving the user the possibility of loging out and potentially use another username
