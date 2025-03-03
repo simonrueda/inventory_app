@@ -125,6 +125,8 @@ def manage_inventory():
         elif action == "delete":
             # last one is for removing any data from the inventory
             part_number = request.form.get('part_number', '').strip().upper()
+            if not part_number:
+                return render_template('manage_inventory.html', inventory=inventory, error=" Error:por favor introduzca una parte para borrar.") 
 
             matching_parts = [part for part in inventory if part['PARTE_NUMERO'] == part_number]
             if not matching_parts:
